@@ -12,7 +12,7 @@ pipeline {
 
     environment {
         //getting the current stable/deployed revision...this is used in undeloy.sh in case of failure...
-        stable_revision = bat(script: 'curl -H "Authorization: Basic $base64encoded" "https://api.enterprise.apigee.com/v1/organizations/pratyushsingh-eval/apis/forecastweatherapi/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
+        stable_revision = bat(script: 'curl -H "Authorization: Basic $base64encoded" "https://api.enterprise.apigee.com/v1/organizations/pratysin-97213-eval/apis/forecastweatherapi_New/deployments" | jq -r ".environment[0].revision[0].name"', returnStdout: true).trim()
     }
 
     stages {
@@ -21,17 +21,17 @@ pipeline {
                 sendNotifications 'STARTED'
                 bat "npm -v"
                 bat "mvn -v"
-                echo "$apigeeUsername"
+              //  echo "$apigeeUsername"
                 echo "Stable Revision: ${env.stable_revision}"
             }
         }		
         stage('Policy-Code Analysis') {
             steps {
                 bat "npm install -g apigeelint"
-                bat "apigeelint -s C:/Users/613055268/Downloads/apigee-deploy-maven-plugin-master/samples/forecastweatherapi-recommended/src/gateway/forecastweatherapi/apiproxy/ -f codeframe.js"
+                bat "apigeelint -s C:/forecastweatherapi/samples/forecastweatherapi-recommended/src/gateway/forecastweatherapi/apiproxy/ -f codeframe.js"
             }
         }
-        stage('Unit-Test-With-Coverage') {
+ /*       stage('Unit-Test-With-Coverage') {
             steps {
                 script {
                     try {
@@ -46,7 +46,7 @@ pipeline {
                     }
                 }
             }
-        }
+        } */
         /*stage('Promotion') {
             steps {
                 timeout(time: 2, unit: 'DAYS') {
@@ -60,7 +60,7 @@ pipeline {
                  
                  // deploy only proxy and deploy both proxy and config based on edge.js update
                 //bat "sh && sh deploy.sh"
-                bat "mvn -f C:/Users/613055268/Downloads/apigee-deploy-maven-plugin-master/samples/forecastweatherapi-recommended/src/gateway/forecastweatherapi/pom.xml install -Pprod -Dusername=pratyush.singh@bt.com -Dpassword=Qwaszx@123 -Dorg=pratyushsingh-eval -Dapigee.config.options=update"
+                bat "mvn -f C:/forecastweatherapi/samples/forecastweatherapi-recommended/src/gateway/forecastweatherapi/pom.xml install -Pprod -Dusername=pratysin@gmail.com -Dpassword=Qwaszx@123 -Dorg=pratyushsingh-eval -Dapigee.config.options=update"
             }
         }
         stage('Integration Tests') {
