@@ -2,7 +2,8 @@ var expect = require('expect.js');
 var sinon = require('sinon');
 
 // this is the javascript file that is under test
-var jsFile = '../../HR-API/apiproxy/resources/jsc/Logging-User-Setting-ID.js';
+/* var jsFile = '../../HR-API/apiproxy/resources/jsc/Logging-User-Setting-ID.js'; */
+var jsFile = 'C:/forecastweatherapi/samples/forecastweatherapi-recommended/src/gateway/forecastweatherapi/apiproxy/resources/jsc/Logging-User-Setting-ID.js';
 
 
 global.context = {
@@ -41,9 +42,9 @@ afterEach(function() {
 describe('feature: user account creation', function() {
 	it('should send inactive account response', function() {
 		contextGetVariableMethod.withArgs('extracted-user-type').returns('customer');
-		contextGetVariableMethod.withArgs('extracted-phone').returns('9886244926');
-		contextGetVariableMethod.withArgs('extracted-first-name').returns('Siddharth');
-		contextGetVariableMethod.withArgs('extracted-last-name').returns('B');
+		contextGetVariableMethod.withArgs('extracted-phone').returns('8197703300');
+		contextGetVariableMethod.withArgs('extracted-first-name').returns('Pratyush');
+		contextGetVariableMethod.withArgs('extracted-last-name').returns('Singh');
 
 
 		var errorThrown = false;
@@ -60,8 +61,8 @@ describe('feature: user account creation', function() {
 		expect(requestConstructorArgs[2]['Content-Type']).to.equal('application/json');		
 		
 		var userPayloadObject = JSON.parse(requestConstructorArgs[3]);
-		expect(userPayloadObject.id).to.equal('9886244926Siddharth');		
-		expect(userPayloadObject.name).to.equal('Siddharth B');
+		expect(userPayloadObject.id).to.equal('8197703300Pratyush');		
+		expect(userPayloadObject.name).to.equal('Pratyush Singh');
 		expect(userPayloadObject.type).to.equal('customer');		
 		expect(userPayloadObject.notification).to.be.false;
 		expect(userPayloadObject.account).to.equal('Inactive');
