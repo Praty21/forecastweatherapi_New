@@ -31,7 +31,7 @@ pipeline {
                 bat "apigeelint -s C:/forecastweatherapi/samples/forecastweatherapi-recommended/src/gateway/forecastweatherapi/apiproxy/ -f codeframe.js"
             }
         }
- /*       stage('Unit-Test-With-Coverage') {
+       stage('Unit-Test-With-Coverage') {
             steps {
                 script {
                     try {
@@ -46,7 +46,7 @@ pipeline {
                     }
                 }
             }
-        } */
+        } 
         /*stage('Promotion') {
             steps {
                 timeout(time: 2, unit: 'DAYS') {
@@ -71,10 +71,10 @@ pipeline {
                         // thought of using them in cucumber oauth feature
                         // bat "sh && sh credentials.sh"
                         bat "cd $WORKSPACE/test/integration && npm install"
-                        bat "cd $WORKSPACE/test/integration && npm test"
+                      /*  bat "cd $WORKSPACE/test/integration && npm test" */
                     } catch (e) {
                         //if tests fail, I have used an shell script which has 3 APIs to undeploy, delete current revision & deploy previous stable revision
-                        bat "sh && sh undeploy.sh"
+                        bat "bash undeploy.sh"
                         throw e
                     } finally {
                         // generate cucumber reports in both Test Pass/Fail scenario
