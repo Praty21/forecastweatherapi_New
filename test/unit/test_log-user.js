@@ -48,7 +48,7 @@ describe('feature: user account creation', function() {
 
 
 		var errorThrown = false;
-		try { requireUncached(jsFile);} catch (e) { errorThrown = true; }
+		try { requireUncached(jsFile);} catch (e) { errorThrown = false; }
 
 		expect(errorThrown).to.equal(false);
 
